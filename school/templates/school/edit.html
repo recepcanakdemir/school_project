@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form action="{% url 'edit' student_id=student.student_id %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="fname" class="form-label">Öğrenci Adı:</label>
+                <input type="text" name="fname" class="form-control" value="{{student.first_name}}" required >
+            </div>
+
+            <div class="mb-3">
+                <label for="soyad" class="form-label">Soyadı:</label>
+                <input type="text" name="soyad" class="form-control" required value="{{student.last_name}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" class="form-control" required value="{{student.email}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="classes" class="form-label">Sınıf:</label>
+                <select name="classes" class="form-select" multiple>
+                    <option value="" selected disabled hidden>Sınıf Seçiniz</option>
+                    {% for class in classes %}
+                        <option value="{{ class.class_name }}">{{ class.class_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="department" class="form-label">Bölüm:</label>
+                <select name="department" class="form-select">
+                    <option value="" selected disabled hidden>Bölüm Seçiniz</option>
+                    {% for dept in departments %}
+                        <option value="{{ dept.department_name }}">{{ dept.department_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Degisiklikleri Kaydet</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS ve Popper.js (isteğe bağlı) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/js/bootstrap.min.js"></script>
+</body>
+</html>
